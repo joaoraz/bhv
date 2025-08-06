@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BHV Te Leva - Quando o Impossível Ganha Roteiro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section - Split Layout */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #F5F7FA 0%, #FFFFFF 100%);
+        }
+
+        .hero-container {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        /* Video Side */
+        .hero-video-side {
+            position: relative;
+        }
+
+        .video-container {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(44, 95, 124, 0.2);
+            position: relative;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #2C5F7C 0%, #87CEEB 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .video-placeholder:hover {
+            transform: scale(1.02);
+        }
+
+        .play-button {
+            position: absolute;
+            z-index: 3;
+            transition: transform 0.3s ease;
+        }
+
+        .video-placeholder:hover .play-button {
+            transform: scale(1.1);
+        }
+
+        .video-overlay {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* Content Side */
+        .hero-content-side {
+            padding-left: 2rem;
+        }
+
+        .hero-logo {
+            font-size: 1.3rem;
+            color: #2C5F7C;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .hero-content-side h1 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            letter-spacing: -1px;
+            color: #2C5F7C;
+            line-height: 1.1;
+        }
+
+        .hero-content-side .highlight {
+            color: #D4AF37;
+            font-weight: 600;
+        }
+
+        .hero-subtitles {
+            margin-bottom: 2rem;
+        }
+
+        .hero-subtitles .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: #666;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .hero-subtitles .subtitle:nth-child(1) { animation-delay: 0.2s; }
+        .hero-subtitles .subtitle:nth-child(2) { animation-delay: 0.6s; }
+        .hero-subtitles .subtitle:nth-child(3) { animation-delay: 1.0s; }
+
+        .hero-content-side .support-text {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .hero-content-side .hero-buttons {
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #D4AF37, #F4D03F);
+            color: #2C5F7C;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Credibility Section */
+        .credibility {
+            padding: 100px 0;
+            background: #F5F7FA;
+            text-align: center;
+        }
+
+        .credibility h2 {
+            font-size: 2.8rem;
+            color: #2C5F7C;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .credibility-text {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 4rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2.5rem 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #2C5F7C;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        /* Destinations Section */
+        .destinations {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.8rem;
+            color: #2C5F7C;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .destination-card {
+            position: relative;
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .destination-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(44, 95, 124, 0.8), rgba(135, 206, 235, 0.6));
+            z-index: 1;
+        }
+
+        .destination-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            color: white;
+            z-index: 2;
+        }
+
+        .destination-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .destination-subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .destination-description {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            line-height: 1.5;
+        }
+
+        /* Journey Section */
+        .journey {
+            padding: 100px 0;
+            background: #F5F7FA;
+        }
+
+        .journey-timeline {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .journey-step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .step-number {
+            background: #2C5F7C;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            flex-shrink: 0;
+            margin-right: 2rem;
+        }
+
+        .step-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            flex: 1;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            color: #2C5F7C;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .step-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Pillars Section */
+        .pillars {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .pillar-card {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+        }
+
+        .pillar-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #2C5F7C, #87CEEB);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+        }
+
+        .pillar-title {
+            font-size: 1.4rem;
+            color: #2C5F7C;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .pillar-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 100px 0;
+            background: #F5F7FA;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .testimonial-quote {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: #2C5F7C;
+        }
+
+        /* Form Section */
+        .form-section {
+            padding: 100px 0;
+            background: #2C5F7C;
+            color: white;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            color: #333;
+        }
+
+        .form-title {
+            font-size: 2.2rem;
+            color: #2C5F7C;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .form-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2C5F7C;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #E5E7EB;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2C5F7C;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+        }
+
+        .form-submit {
+            width: 100%;
+            background: linear-gradient(45deg, #2C5F7C, #87CEEB);
+            color: white;
+            padding: 18px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .destinations-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .journey-step {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step-number {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Background Images for Destination Cards */
+        .dest-africa { background-image: url('https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'); background-size: cover; background-position: center; }
+        .dest-asia { background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'); background-size: cover; background-position: center; }
+        .dest-arabia { background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'); background-size: cover; background-position: center; }
+        .dest-europa { background-image: url('https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'); background-size: cover; background-position: center; }
+        .dest-oceania { background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'); background-size: cover; background-position: center; }
+        .dest-americas { background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'); background-size: cover; background-position: center; }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <!-- Video Side -->
+            <div class="hero-video-side">
+                <div class="video-container">
+                    <div class="video-placeholder">
+                        <div class="play-button">
+                            <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                                <circle cx="30" cy="30" r="30" fill="rgba(255,255,255,0.9)"/>
+                                <path d="M25 20L40 30L25 40V20Z" fill="#2C5F7C"/>
+                            </svg>
+                        </div>
+                        <div class="video-overlay">
+                            <p>BHV Te Leva - Manifesto</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Content Side -->
+            <div class="hero-content-side">
+                <div class="hero-logo">BHV Te Leva</div>
+                <h1>O que era <span class="highlight">impossível</span> ganha roteiro</h1>
+                <div class="hero-subtitles">
+                    <div class="subtitle">→ Viver momentos únicos em um paraíso escondido?</div>
+                    <div class="subtitle">→ Unir a família sob o céu mais puro do planeta?</div>
+                    <div class="subtitle">→ Transformar a aurora boreal em memória inesquecível?</div>
+                </div>
+                <p class="support-text">Para nós, tudo isso é questão de planejar e fazer acontecer.</p>
+                <div class="hero-buttons">
+                    <a href="#form" class="btn btn-primary">Faça o Impossível Acontecer</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Credibility Section -->
+    <section class="credibility">
+        <div class="container">
+            <h2>30 Anos Levando Você Além</h2>
+            <p class="credibility-text">Fundada por Jacqueline Dallal, a Be Happy Viagens é referência em viagens sob medida que transformam perspectivas e expandem horizontes.</p>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number">30</div>
+                    <div class="stat-label">Anos de Experiência</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">+11k</div>
+                    <div class="stat-label">Viagens Personalizadas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">+70</div>
+                    <div class="stat-label">Destinos com Acesso a Experiências Exclusivas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Experiências Impossíveis Realizadas</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations Section -->
+    <section class="destinations">
+        <div class="container">
+            <div class="section-header">
+                <h2>Onde o Impossível Vira Roteiro</h2>
+                <p>Uma experiência pode acontecer debaixo d'água ou bem acima das nuvens. O importante é que seja lembrada para sempre.</p>
+            </div>
+            
+            <div class="destinations-grid">
+                <div class="destination-card dest-africa">
+                    <div class="destination-content">
+                        <div class="destination-title">ÁFRICA</div>
+                        <div class="destination-subtitle">"ONDE TUDO COMEÇOU E RECOMEÇA"</div>
+                        <div class="destination-description">Onde tudo começou e tudo recomeça. Ilhas privadas de $50.000/noite, o novo padrão de luxo africano, berço da humanidade.</div>
+                    </div>
+                </div>
+                
+                <div class="destination-card dest-asia">
+                    <div class="destination-content">
+                        <div class="destination-title">ÁSIA</div>
+                        <div class="destination-subtitle">"FUTURO ENCONTRA ANCESTRALIDADE"</div>
+                        <div class="destination-description">Onde o futuro encontra a ancestralidade. Do reino espiritual do Himalaia aos arquipélagos com 75% das espécies de corais do mundo.</div>
+                    </div>
+                </div>
+                
+                <div class="destination-card dest-arabia">
+                    <div class="destination-content">
+                        <div class="destination-title">ARÁBIA</div>
+                        <div class="destination-subtitle">"O FUTURO JÁ CHEGOU"</div>
+                        <div class="destination-description">O futuro já chegou. Cidades futurísticas em construção, sítios arqueológicos nabateus em paisagens lunares, as Maldivas do Oriente Médio.</div>
+                    </div>
+                </div>
+                
+                <div class="destination-card dest-europa">
+                    <div class="destination-content">
+                        <div class="destination-title">EUROPA</div>
+                        <div class="destination-subtitle">"CADA PEDRA CONTA UMA HISTÓRIA"</div>
+                        <div class="destination-description">Onde cada pedra conta uma história milenar. Da Geórgia na encruzilhada Europa-Ásia aos vinhedos em terraços do Douro.</div>
+                    </div>
+                </div>
+                
+                <div class="destination-card dest-oceania">
+                    <div class="destination-content">
+                        <div class="destination-title">OCEANIA</div>
+                        <div class="destination-subtitle">"ONDE A NATUREZA SUPERA A IMAGINAÇÃO"</div>
+                        <div class="destination-description">Onde a natureza supera a imaginação. Eco-pods de luxo acessíveis só por helicóptero, 12 km² de florestas tropicais privadas, patrimônios mundiais isolados.</div>
+                    </div>
+                </div>
+                
+                <div class="destination-card dest-americas">
+                    <div class="destination-content">
+                        <div class="destination-title">AMÉRICAS & CARIBE</div>
+                        <div class="destination-subtitle">"VIZINHOS QUE SÃO UNIVERSOS PARALELOS"</div>
+                        <div class="destination-description">Vizinhos que são universos paralelos. Do Alasca ao Havaí, descobrimos ilhas acessíveis apenas por helicóptero e resorts que redefinem exclusividade.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey Section -->
+    <section class="journey" id="journey">
+        <div class="container">
+            <div class="section-header">
+                <h2>Como o Impossível Vira Roteiro</h2>
+                <p>Viajar com a Be Happy Viagens não começa com uma reserva. Começa com escuta, curadoria e propósito. Veja como transformamos sonhos em experiências reais:</p>
+            </div>
+            
+            <div class="journey-timeline">
+                <div class="journey-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Entendemos Você, Não Apenas Destinos</h3>
+                        <p class="step-description">Você preenche um breve formulário com suas expectativas, preferências e estilo de viagem. Nosso objetivo é entender mais do que destinos. Queremos entender você.</p>
+                    </div>
+                </div>
+                
+                <div class="journey-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Investimento na Curadoria Personalizada</h3>
+                        <p class="step-description">Uma taxa única é cobrada para viabilizar o atendimento personalizado e a curadoria inicial. Essa taxa é 100% reembolsada em caso de contratação do roteiro completo.</p>
+                    </div>
+                </div>
+                
+                <div class="journey-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Onde Impossível Vira Possível</h3>
+                        <p class="step-description">Você será atendido por consultores especializados em experiências de alto padrão, que irão validar seu perfil, levantar destinos únicos sob medida e discutir possibilidades logísticas.</p>
+                    </div>
+                </div>
+                
+                <div class="journey-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Sua Experiência Nasce Aqui</h3>
+                        <p class="step-description">Com base na consultoria, desenhamos uma proposta exclusiva - feita sob medida, com tudo o que você precisa e nada que você não precise.</p>
+                    </div>
+                </div>
+                
+                <div class="journey-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Seu Mundo em Documento Elegante</h3>
+                        <p class="step-description">Você recebe roteiro dia a dia, propostas de hospedagem, experiências exclusivas, deslocamentos e investimento completo detalhado.</p>
+                    </div>
+                </div>
+                
+                <div class="journey-step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Quando Sonho Vira Compromisso</h3>
+                        <p class="step-description">Com sua aprovação, formalizamos tudo. A Be Happy assume integralmente a gestão da sua viagem.</p>
+                    </div>
+                </div>
+                
+                <div class="journey-step">
+                    <div class="step-number">7</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Experiência Antes da Experiência</h3>
+                        <p class="step-description">Cuidamos da experiência pré-viagem com detalhes únicos - mimos, orientação, concierge de embarque e mais.</p>
+                    </div>
+                </div>
+                
+                <div class="journey-step">
+                    <div class="step-number">8</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Suporte Total e Próxima Jornada</h3>
+                        <p class="step-description">Durante a viagem, você conta com suporte remoto. Ao retornar, convidamos você a compartilhar impressões e planejar a próxima transformação.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pillars Section -->
+    <section class="pillars">
+        <div class="container">
+            <div class="section-header">
+                <h2>Acreditamos que Viajar é Ousar</h2>
+                <p>É deixar o improvável tomar conta. É se lançar no desconhecido e descobrir sensações únicas. Para nós, tudo é questão de planejar e fazer acontecer.</p>
+            </div>
+            
+            <div class="pillars-grid">
+                <div class="pillar-card">
+                    <div class="pillar-icon">⚡</div>
+                    <h3 class="pillar-title">PLANEJAMENTO QUE FAZ ACONTECER</h3>
+                    <p class="pillar-description">Não deixamos nada ao acaso. Cada detalhe é pensado para que você se lance no desconhecido com total segurança.</p>
+                </div>
+                
+                <div class="pillar-card">
+                    <div class="pillar-icon">🗺️</div>
+                    <h3 class="pillar-title">IMPROVÁVEL VIRA ROTEIRO</h3>
+                    <p class="pillar-description">Transformamos impossibilidades em experiências reais. 30 anos criando conexões únicas que abrem portas fechadas para outros.</p>
+                </div>
+                
+                <div class="pillar-card">
+                    <div class="pillar-icon">💫</div>
+                    <h3 class="pillar-title">SENSAÇÕES NUNCA SENTIDAS</h3>
+                    <p class="pillar-description">Criamos experiências que ficam gravadas para sempre. Debaixo d'água ou acima das nuvens, o importante é que seja inesquecível.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Quando o Impossível Acontece</h2>
+                <p>Histórias reais de quem descobriu que impossível é só uma palavra. Vidas que ganharam novas dimensões através de experiências únicas.</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"É impossível colocar em palavras o que foi a nossa lua de mel! Falar que foi a melhor viagem das nossas vidas é pouco, pois nem nos nossos melhores sonhos, a gente conseguiria imaginar tudo o que vivemos! O roteiro, a escolha dos hotéis, as pessoas envolvidas, o cuidado com todos os detalhes, enfim, tudo foi perfeito!"</p>
+                    <div class="testimonial-author">— Sabrina Sato e Nicolas Prattes</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Ficamos numa ilha deserta, fizemos piquenique em uma casinha de madeira, vimos tubarõezinhos, corais e muitos peixes, foi tudo lindo! Um conto de fadas, essa é minha lua de mel nas Maldivas... Foi mágico, uma pena que acabou!"</p>
+                    <div class="testimonial-author">— Xuxa e Junno</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Vocês pensaram em cada detalhe, cada hotel, cada experiência, construímos tanta história para contar... a Be Happy Viagens fez com que nossa viagem fosse inesquecível. Viajar com vocês é uma experiência realmente única."</p>
+                    <div class="testimonial-author">— Deborah Secco</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Essa foi a nossa primeira viagem e que seja a primeira de muitas, porque foi maravilhoso, serviço excelente desde a escolha do hotel que tinha a minha cara, eu amei!!! Amei viajar com vocês!"</p>
+                    <div class="testimonial-author">— Marcos Mion e Suzana Gullo</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="form-section" id="form">
+        <div class="container">
+            <div class="form-container">
+                <h2 class="form-title">Sua Nova Realidade Te Espera</h2>
+                <p class="form-subtitle">Conte-nos seus sonhos. Vamos desenhar juntos a viagem que vai transformar sua perspectiva de mundo.</p>
+                
+                <form id="bhv-form">
+                    <div class="form-group">
+                        <label for="name">Nome Completo *</label>
+                        <input type="text" id="name" name="name" placeholder="Seu nome completo" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">E-mail *</label>
+                        <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="whatsapp">WhatsApp *</label>
+                        <input type="tel" id="whatsapp" name="whatsapp" placeholder="(11) 99999-9999" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="destination">Para onde a BHV pode te levar?</label>
+                        <select id="destination" name="destination">
+                            <option value="">Selecione uma região</option>
+                            <option value="africa">África - Onde tudo começou e recomeça</option>
+                            <option value="asia">Ásia - Futuro encontra ancestralidade</option>
+                            <option value="arabia">Arábia - O futuro já chegou</option>
+                            <option value="europa">Europa - Cada pedra conta uma história</option>
+                            <option value="oceania">Oceania - Onde a natureza supera a imaginação</option>
+                            <option value="americas">Américas & Caribe - Vizinhos que são universos paralelos</option>
+                            <option value="surpresa">Surpreenda-me!</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dreams">Conte-nos seus sonhos de viagem</label>
+                        <textarea id="dreams" name="dreams" placeholder="Descreva que tipo de experiência você busca, momentos especiais que quer viver, ou simplesmente nos diga: me levem para uma nova realidade..."></textarea>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="agreement" name="agreement" required>
+                        <label for="agreement">Aceito continuar e estou ciente de que o ticket por pessoa é superior a R$30 mil reais</label>
+                    </div>
+                    
+                    <button type="submit" class="form-submit">Quero Descobrir Minha Nova Realidade</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Form submission handler
+        document.getElementById('bhv-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Simple validation
+            if (!data.name || !data.email || !data.whatsapp || !data.agreement) {
+                alert('Por favor, preencha todos os campos obrigatórios e aceite os termos.');
+                return;
+            }
+            
+            // Here you would typically send the data to your server
+            console.log('Form submitted:', data);
+            
+            // Show success message
+            alert('Obrigado! Em breve nossa equipe entrará em contato para transformar seus sonhos em realidade.');
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and sections for animation
+        document.querySelectorAll('.stat-card, .destination-card, .journey-step, .pillar-card, .testimonial-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Typewriter effect for hero subtitles
+        const subtitles = document.querySelectorAll('.hero .subtitle');
+        subtitles.forEach((subtitle, index) => {
+            subtitle.style.opacity = '0';
+            setTimeout(() => {
+                subtitle.style.opacity = '1';
+                subtitle.style.animation = 'fadeInUp 0.8s ease forwards';
+            }, index * 800);
+        });
+    </script>
+
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero .subtitle {
+            animation-fill-mode: both;
+        }
+    </style>
+</body>
+</html>
