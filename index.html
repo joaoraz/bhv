@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jornada do Usuário - Seguro Garantia</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.2em;
+            margin: 0;
+        }
+        
+        .journey-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .step {
+            display: flex;
+            align-items: center;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 5px solid #3498db;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .step:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.2);
+        }
+        
+        .step-number {
+            background: #3498db;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-right: 25px;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-title {
+            color: #2c3e50;
+            font-size: 1.4em;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .step-description {
+            color: #5a6c7d;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .step-details {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .step-details ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .step-details li {
+            margin-bottom: 5px;
+            color: #6c757d;
+        }
+        
+        .modal-indicator {
+            background: #e74c3c;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+            position: absolute;
+            top: 15px;
+            right: 20px;
+        }
+        
+        .page-indicator {
+            background: #27ae60;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+            position: absolute;
+            top: 15px;
+            right: 20px;
+        }
+        
+        .decision-point {
+            border-left-color: #f39c12;
+        }
+        
+        .decision-point .step-number {
+            background: #f39c12;
+        }
+        
+        .final-step {
+            border-left-color: #27ae60;
+        }
+        
+        .final-step .step-number {
+            background: #27ae60;
+        }
+        
+        .connector {
+            height: 30px;
+            width: 3px;
+            background: #bdc3c7;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .connector::after {
+            content: '↓';
+            position: absolute;
+            bottom: -10px;
+            left: -8px;
+            color: #bdc3c7;
+            font-size: 1.2em;
+        }
+        
+        .scenarios {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .scenarios h3 {
+            color: #856404;
+            margin-top: 0;
+            font-size: 1.3em;
+        }
+        
+        .scenario {
+            margin: 15px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .key-insights {
+            background: #d1ecf1;
+            border: 2px solid #17a2b8;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .key-insights h3 {
+            color: #0c5460;
+            margin-top: 0;
+            font-size: 1.3em;
+        }
+        
+        .insight {
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #17a2b8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛡️ Jornada do Usuário</h1>
+            <p>Contratação de Seguro Garantia - Jornal do Licitante</p>
+        </div>
+        
+        <div class="journey-flow">
+            <!-- Passo 1 -->
+            <div class="step">
+                <div class="modal-indicator">MODAL</div>
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <div class="step-title">📋 Consulta Inicial de Limite</div>
+                    <div class="step-description">
+                        Usuário acessa o Jornal do Licitante, clica em um edital e abre o modal de consulta de seguro garantia.
+                    </div>
+                    <div class="step-details">
+                        <strong>Formulário (Modal):</strong>
+                        <ul>
+                            <li>CNPJ (obrigatório)</li>
+                            <li>E-mail (obrigatório)</li>
+                            <li>Telefone (obrigatório)</li>
+                            <li>idCorretor: 245 (fixo/oculto)</li>
+                        </ul>
+                        <strong>Ação:</strong> Botão "CONSULTE AGORA" → API Consulta Tomador
+                    </div>
+                </div>
+            </div>
+            
+            <div class="connector"></div>
+            
+            <!-- Passo 2 -->
+            <div class="step decision-point">
+                <div class="modal-indicator">MODAL</div>
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <div class="step-title">⚖️ Resultado da Consulta (Mesmo Modal)</div>
+                    <div class="step-description">
+                        O modal exibe o resultado da consulta de limite de crédito baseado na resposta da API.
+                    </div>
+                    <div class="step-details">
+                        <strong>Cenário A - Sem Limite:</strong>
+                        <ul>
+                            <li>Exibe mensagem de "businessMessage"</li>
+                            <li>Ex: "Não foi possível consultar o Limite de Crédito aprovado"</li>
+                            <li>Opção de tentar novamente ou fechar</li>
+                        </ul>
+                        <strong>Cenário B - Com Limite:</strong>
+                        <ul>
+                            <li>Exibe valor do limite aprovado</li>
+                            <li>Exibe mensagem de "businessMessage"</li>
+                            <li>Botão "CONTRATE AGORA" aparece</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="connector"></div>
+            
+            <!-- Passo 3 -->
+            <div class="step">
+                <div class="page-indicator">NOVA PÁGINA</div>
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <div class="step-title">🏢 Página de Contratação</div>
+                    <div class="step-description">
+                        <strong>PONTO CRUCIAL:</strong> Usuário clica em "CONTRATE AGORA" e é redirecionado para uma NOVA PÁGINA no domínio do Jornal do Licitante.
+                    </div>
+                    <div class="step-details">
+                        <strong>Contexto Importante:</strong>
+                        <ul>
+                            <li>Nova URL no mesmo domínio (jornal.licitante.com/contratacao ou similar)</li>
+                            <li>Usuário ainda precisa buscar/anexar o edital</li>
+                            <li>Formulário completo de contratação</li>
+                            <li>Dados da consulta anterior são preservados</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="connector"></div>
+            
+            <!-- Passo 4 -->
+            <div class="step">
+                <div class="page-indicator">PÁGINA</div>
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <div class="step-title">📝 Preenchimento dos Dados de Contratação</div>
+                    <div class="step-description">
+                        Na nova página, usuário preenche todos os dados necessários para a contratação do seguro.
+                    </div>
+                    <div class="step-details">
+                        <strong>Formulário Completo:</strong>
+                        <ul>
+                            <li>Número do Edital</li>
+                            <li>Upload do Edital (base64)</li>
+                            <li>Valor IS (Importância Segurada)</li>
+                            <li>Dados completos do Licitante (nome, CPF/CNPJ, endereço)</li>
+                            <li>Termo de aceite (se necessário)</li>
+                        </ul>
+                        <strong>Dados ocultos:</strong> idCorretor: 245, idTomador (da consulta), idModalidade: 17
+                    </div>
+                </div>
+            </div>
+            
+            <div class="connector"></div>
+            
+            <!-- Passo 5 -->
+            <div class="step final-step">
+                <div class="page-indicator">PÁGINA</div>
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <div class="step-title">✅ Contratação Finalizada</div>
+                    <div class="step-description">
+                        Sistema processa a contratação via API "Contrate Agora" e exibe os documentos finais.
+                    </div>
+                    <div class="step-details">
+                        <strong>Resultado:</strong>
+                        <ul>
+                            <li>Apólice de seguro (base64Apolice)</li>
+                            <li>Boleto para pagamento (base64Boleto)</li>
+                            <li>Opções de download/impressão</li>
+                            <li>Número da apólice gerado</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scenarios">
+            <h3>🎯 Cenários Baseados no Limite de Crédito</h3>
+            <div class="scenario">
+                <strong>Cenário 1:</strong> Sem limite → Mensagem de erro no modal, processo interrompido
+            </div>
+            <div class="scenario">
+                <strong>Cenário 2:</strong> Com limite aprovado → Segue para página de contratação
+            </div>
+            <div class="scenario">
+                <strong>Cenário 3:</strong> Com limite + necessidade de carta de crédito → Segue para contratação com termo de aceite obrigatório
+            </div>
+        </div>
+        
+        <div class="key-insights">
+            <h3>💡 Insights Importantes para o Design</h3>
+            <div class="insight">
+                <strong>Transição Modal → Página:</strong> Precisa ser clara e fluida, mantendo o contexto da consulta
+            </div>
+            <div class="insight">
+                <strong>Estado dos Dados:</strong> Informações da consulta (limite, idTomador) devem ser preservadas entre as interfaces
+            </div>
+            <div class="insight">
+                <strong>Upload de Edital:</strong> Acontece apenas na página de contratação, não no modal inicial
+            </div>
+            <div class="insight">
+                <strong>Responsabilidade:</strong> Modal = verificação de elegibilidade | Página = contratação efetiva
+            </div>
+        </div>
+    </div>
+</body>
+</html>
